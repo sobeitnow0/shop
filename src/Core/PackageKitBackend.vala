@@ -310,7 +310,8 @@ public class AppCenterCore.PackageKitBackend : Backend, Object {
         if (components.length == 0) {
             var category_array = new GLib.GenericArray<AppStream.Category> ();
             category_array.add (category);
-            AppStream.utils_sort_components_into_categories (appstream_pool.get_components (), category_array, true);
+            GLib.GenericArray<weak AppStream.Component> pool_components = appstream_pool.get_components ();
+            AppStream.utils_sort_components_into_categories ((GLib.GenericArray<AppStream.Component>) pool_components, category_array, true);
             components = category.get_components ();
         }
 
@@ -351,7 +352,7 @@ public class AppCenterCore.PackageKitBackend : Backend, Object {
     public Gee.Collection<AppCenterCore.Package> search_applications_mime (string query) {
         var apps = new Gee.TreeSet<AppCenterCore.Package> ();
         foreach (var package in package_list.values) {
-            weak AppStream.Provided? provided = package.component.get_provided_for_kind (AppStream.ProvidedKind.MIMETYPE);
+            weak AppStream.Provided? provided = package.component.get_provided_for_kind (AppStream.ProvidedKind.MEDIATYPE);
             if (provided != null && provided.has_item (query)) {
                 apps.add (package);
             }

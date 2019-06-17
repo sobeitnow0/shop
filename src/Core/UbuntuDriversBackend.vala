@@ -55,6 +55,9 @@ public class AppCenterCore.UbuntuDriversBackend : Backend, Object {
             return cached_packages;
         }
 
+        unowned string? latest_nvidia_pkg = null;
+        unowned string? latest_nvidia_ver = null;
+
         string[] tokens = command_output.split ("\n");
         for (int i = 0; i < tokens.length; i++) {
             if (cancellable.is_cancelled ()) {
@@ -66,27 +69,57 @@ public class AppCenterCore.UbuntuDriversBackend : Backend, Object {
                 continue;
             }
 
-            var driver_component = new AppStream.Component ();
-            driver_component.set_kind (AppStream.ComponentKind.DRIVER);
-            driver_component.set_pkgnames ({ package_name });
-            driver_component.set_id (package_name);
-
-            var icon = new AppStream.Icon ();
-            icon.set_name ("application-x-firmware");
-            icon.set_kind (AppStream.IconKind.STOCK);
-            driver_component.add_icon (icon);
-
-            var package = new Package (this, driver_component);
-            if (package.installed) {
-                package.mark_installed ();
-                package.update_state ();
+            if (package_name.has_prefix ("backport-") && package_name.has_suffix ("-dkms")) {
+                continue;
             }
 
-            cached_packages.add (package);
+            unowned string? nvidia_version = null;
+
+            if (package_name.has_prefix ("nvidia-driver-")) {
+                nvidia_version = package_name.offset (14);
+            } else if (package_name.has_prefix ("nvidia-")) {
+                nvidia_version = package_name.offset (7);
+            }
+
+            if (null != nvidia_version) {
+                if (-1 == GLib.strcmp (latest_nvidia_ver, nvidia_version)) {
+                    latest_nvidia_pkg = package_name;
+                    latest_nvidia_ver = nvidia_version;
+                }
+
+                continue;
+            }
+
+            cached_packages.add (add_driver (package_name));
+        }
+
+        if (null != latest_nvidia_pkg) {
+            debug ("adding NVIDIA driver package %s", latest_nvidia_pkg);
+            cached_packages.add (add_driver (latest_nvidia_pkg));
         }
 
         working = false;
         return cached_packages;
+    }
+
+    private Package add_driver (string package_name) {
+        var driver_component = new AppStream.Component ();
+        driver_component.set_kind (AppStream.ComponentKind.DRIVER);
+        driver_component.set_pkgnames ({ package_name });
+        driver_component.set_id (package_name);
+
+        var icon = new AppStream.Icon ();
+        icon.set_name ("application-x-firmware");
+        icon.set_kind (AppStream.IconKind.STOCK);
+        driver_component.add_icon (icon);
+
+        var package = new Package (this, driver_component);
+        if (package.installed) {
+            package.mark_installed ();
+            package.update_state ();
+        }
+
+        return package;
     }
 
     public Gee.Collection<Package> get_applications_for_category (AppStream.Category category) {
