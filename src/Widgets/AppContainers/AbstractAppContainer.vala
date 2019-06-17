@@ -462,6 +462,7 @@ namespace AppCenter {
         private bool install_approved (AppCenterCore.Package package) {
             bool approved = true;
 
+#if CURATED
             if (App.settings.get_boolean ("non-curated-warning") == true && !(package.is_native || is_os_updates)) {
                 approved = false;
 
@@ -488,6 +489,7 @@ namespace AppCenter {
                 non_curated_warning.run ();
                 non_curated_warning.destroy ();
             }
+#endif
 
             if (App.settings.get_boolean ("content-warning") == true && package.is_explicit) {
                 approved = false;

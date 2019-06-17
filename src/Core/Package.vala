@@ -325,6 +325,23 @@ public class AppCenterCore.Package : Object {
     public string origin_description {
         owned get {
             unowned string origin = component.get_origin ();
+#if POP_OS
+            if (backend is PackageKitBackend) {
+                if (origin == APPCENTER_PACKAGE_ORIGIN) {
+                    return _("Pop!_Shop");
+                } else if (origin.has_prefix ("ubuntu-")) {
+                    return _("Ubuntu (deb)");
+                } else if (origin == "pop-artful-extra") {
+                    return _("Pop!_OS (deb)");
+                }
+            } else if (backend is FlatpakBackend) {
+                return _("%s (flatpak)").printf (origin);
+            } else if (backend is UbuntuDriversBackend) {
+                return _("Ubuntu Drivers");
+            }
+
+            return _("Other (deb)");
+#else
             if (backend is PackageKitBackend) {
                 if (origin == APPCENTER_PACKAGE_ORIGIN) {
                     return _("AppCenter");
@@ -340,6 +357,7 @@ public class AppCenterCore.Package : Object {
             }
 
             return _("Unknown Origin (non-curated)");
+#endif
         }
     }
 
