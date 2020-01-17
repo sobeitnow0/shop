@@ -47,8 +47,37 @@ public class AppCenterCore.BackendAggregator : Backend, Object {
         set { }
     }
 
+    private static int package_priority (Package package) {
+        unowned string origin = package.component.get_origin ();
+        if (origin == "pop-artful-extra") {
+            return 2;
+        } else if (origin == "flathub") {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    private static int package_sort (Package a, Package b) {
+        int ret = a.normalized_component_id.collate (b.normalized_component_id);
+        if (ret != 0) {
+            return ret;
+        } else {
+            return package_priority(b) - package_priority(a);
+        }
+    }
+
+    private static Gee.Collection<Package> package_apps(Gee.Collection<Package> packages) {
+        var apps = new Gee.TreeSet<Package> ((a, b) => {
+            return a.normalized_component_id.collate (b.normalized_component_id);
+        });
+        apps.add_all(packages);
+
+        return apps;
+    }
+
     public async Gee.Collection<Package> get_installed_applications (Cancellable? cancellable = null) {
-        var apps = new Gee.TreeSet<Package> ();
+        var packages = new Gee.ArrayList<Package> ();
         foreach (var backend in backends) {
             if (cancellable.is_cancelled ()) {
                 break;
@@ -56,56 +85,51 @@ public class AppCenterCore.BackendAggregator : Backend, Object {
 
             var installed = yield backend.get_installed_applications (cancellable);
             if (installed != null) {
-                apps.add_all (installed);
+                packages.add_all (installed);
             }
         }
+        packages.sort(package_sort);
 
-        return apps;
+        return package_apps(packages);
     }
 
     public Gee.Collection<Package> get_applications_for_category (AppStream.Category category) {
-        var apps = new Gee.TreeSet<Package> ((a, b) => {
-            return a.normalized_component_id.collate (b.normalized_component_id);
-        });
-
+        var packages = new Gee.ArrayList<Package> ();
         foreach (var backend in backends) {
-            apps.add_all (backend.get_applications_for_category (category));
+            packages.add_all (backend.get_applications_for_category (category));
         }
+        packages.sort(package_sort);
 
-        return apps;
+        return package_apps(packages);
     }
 
     public Gee.Collection<Package> search_applications (string query, AppStream.Category? category) {
-        var apps = new Gee.TreeSet<Package> ((a, b) => {
-            return a.normalized_component_id.collate (b.normalized_component_id);
-        });
-
+        var packages = new Gee.ArrayList<Package> ();
         foreach (var backend in backends) {
-            apps.add_all (backend.search_applications (query, category));
+            packages.add_all (backend.search_applications (query, category));
         }
+        packages.sort(package_sort);
 
-        return apps;
+        return package_apps(packages);
     }
 
     public Gee.Collection<Package> search_applications_mime (string query) {
-        var apps = new Gee.TreeSet<Package> ();
+        var packages = new Gee.ArrayList<Package> ();
         foreach (var backend in backends) {
-            apps.add_all (backend.search_applications_mime (query));
+            packages.add_all (backend.search_applications_mime (query));
         }
+        packages.sort(package_sort);
 
-        return apps;
+        return package_apps(packages);
     }
 
     public Package? get_package_for_component_id (string id) {
-        Package? package;
-        foreach (var backend in backends) {
-            package = backend.get_package_for_component_id (id);
-            if (package != null) {
-                return package;
-            }
+        Gee.Collection<Package> packages = get_packages_for_component_id (id);
+        if (! packages.is_empty) {
+            return packages.to_array()[0];
+        } else {
+            return null;
         }
-
-        return null;
     }
 
     public Gee.Collection<Package> get_packages_for_component_id (string id) {
@@ -118,30 +142,37 @@ public class AppCenterCore.BackendAggregator : Backend, Object {
         foreach (var backend in backends) {
             packages.add_all (backend.get_packages_for_component_id (package_id));
         }
+        packages.sort(package_sort);
 
         return packages;
     }
 
     public Package? get_package_for_desktop_id (string desktop_id) {
-        Package? package;
+        var packages = new Gee.ArrayList<Package> ();
         foreach (var backend in backends) {
-            package = backend.get_package_for_desktop_id (desktop_id);
+            var package = backend.get_package_for_desktop_id (desktop_id);
             if (package != null) {
-                return package;
+                packages.add (package);
             }
         }
+        packages.sort(package_sort);
 
-        return null;
+        if (! packages.is_empty) {
+            return packages.to_array()[0];
+        } else {
+            return null;
+        }
     }
 
     public Gee.Collection<Package> get_packages_by_author (string author, int max) {
-        var packages = new Gee.TreeSet<Package> ();
+        var packages = new Gee.ArrayList<Package> ();
         foreach (var backend in backends) {
             packages.add_all (backend.get_packages_by_author (author, max));
             if (packages.size >= max) {
                 break;
             }
         }
+        packages.sort(package_sort);
 
         return packages;
     }
