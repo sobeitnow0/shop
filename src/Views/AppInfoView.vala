@@ -646,9 +646,13 @@ namespace AppCenter.Views {
                 }
 
                 count++;
-                if (count > 1) {
-                    version_combo_revealer.reveal_child = true;
-                }
+            }
+
+            version_combo_revealer.reveal_child = true;
+            if (count > 1) {
+                version_combo.sensitive = true;
+            } else {
+                version_combo.sensitive = false;
             }
 
             new Thread<void*> ("content-loading", () => {
