@@ -33,7 +33,7 @@ Depends: appstream (>= 0.12),
          repoman,
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: appstream-data-pop
+Recommends: appstream-data-pop, python3-pyflatpak
 Description: Fast application store
  Install, update and remove apps with ease.
  Helps independent developers.
