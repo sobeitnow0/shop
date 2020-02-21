@@ -110,7 +110,7 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
 
     construct {
         icon_name = "system-software-install";
-        set_size_request (910, 640);
+        //  set_size_request (910, 640);
 
         int window_x, window_y;
         int window_width, window_height;

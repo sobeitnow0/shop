@@ -80,8 +80,8 @@ namespace AppCenter.Views {
 
             if (screenshots.length > 0) {
                 app_screenshots = new Gtk.Stack ();
-                app_screenshots.width_request = 800;
-                app_screenshots.height_request = 500;
+                //  app_screenshots.width_request = 800;
+                //  app_screenshots.height_request = 500;
                 app_screenshots.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
                 app_screenshots.halign = Gtk.Align.CENTER;
 
@@ -271,7 +271,7 @@ namespace AppCenter.Views {
 #endif
 
             var content_grid = new Gtk.Grid ();
-            content_grid.width_request = 800;
+            //  content_grid.width_request = 800;
             content_grid.halign = Gtk.Align.CENTER;
             content_grid.hexpand = true;
             content_grid.margin = 48;
@@ -354,7 +354,7 @@ namespace AppCenter.Views {
             header_grid.valign = Gtk.Align.CENTER;
             header_grid.margin = content_grid.margin / 2;
             // Must be wide enough to fit long package name and progress bar
-            header_grid.width_request = content_grid.width_request + 2 * (content_grid.margin - header_grid.margin);
+            //  header_grid.width_request = content_grid.width_request + 2 * (content_grid.margin - header_grid.margin);
             header_grid.attach (image, 0, 0, 1, 3);
             header_grid.attach (package_name, 1, 0);
             header_grid.attach (package_author, 1, 1, 2);
@@ -381,7 +381,7 @@ namespace AppCenter.Views {
             var footer_grid = new Gtk.Grid ();
             footer_grid.halign = Gtk.Align.CENTER;
             footer_grid.margin = 12;
-            footer_grid.width_request = 800;
+            //  footer_grid.width_request = 800;
 
             var project_license = package.component.project_license;
             if (project_license != null) {
@@ -471,7 +471,7 @@ namespace AppCenter.Views {
                 other_apps_grid.halign = Gtk.Align.CENTER;
                 other_apps_grid.row_spacing = 12;
                 other_apps_grid.margin = 24;
-                other_apps_grid.width_request = 800;
+                //  other_apps_grid.width_request = 800;
                 other_apps_grid.orientation = Gtk.Orientation.VERTICAL;
                 other_apps_grid.add (other_apps_header);
                 other_apps_grid.add (other_apps_carousel);
@@ -754,8 +754,8 @@ namespace AppCenter.Views {
             try {
                 var pixbuf = new Gdk.Pixbuf.from_file_at_scale (path, 800 * scale_factor, 600 * scale_factor, true);
                 var image = new Gtk.Image ();
-                image.width_request = 800;
-                image.height_request = 500;
+                //  image.width_request = 800;
+                //  image.height_request = 500;
                 image.icon_name = "image-x-generic";
                 image.halign = Gtk.Align.CENTER;
                 image.gicon = pixbuf;

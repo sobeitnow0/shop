@@ -84,7 +84,7 @@ namespace AppCenter {
             var pop_banner_copy_area = new Gtk.Grid ();
             pop_banner_copy_area.halign = Gtk.Align.CENTER;
             pop_banner_copy_area.hexpand = true;
-            pop_banner_copy_area.width_request = 750;
+            //  pop_banner_copy_area.width_request = 750;
             pop_banner_copy_area.attach (pop_banner_copy_1, 0, 0, 1, 1);
             pop_banner_copy_area.attach (pop_banner_copy_2, 0, 1, 1, 1);
 

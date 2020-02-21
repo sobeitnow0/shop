@@ -32,6 +32,7 @@ public class AppCenter.Widgets.ListPackageRowGrid : AbstractPackageRowGrid {
         ((Gtk.Misc) package_summary).xalign = 0;
 
         info_grid.attach (package_summary, 1, 1, 1, 1);
+        attach (info_grid, 0, 0, 1, 1);
     }
 
     protected override void set_up_package (uint icon_size = 48) {

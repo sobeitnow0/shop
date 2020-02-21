@@ -65,7 +65,7 @@ public abstract class AppCenter.Widgets.AbstractPackageRowGrid : AbstractAppCont
         action_stack.margin_top = 10;
         action_stack.valign = Gtk.Align.START;
 
-        attach (info_grid, 0, 0, 1, 1);
+        //  attach (info_grid, 0, 0, 1, 1);
         attach (action_stack, 3, 0, 1, 1);
     }
 }
