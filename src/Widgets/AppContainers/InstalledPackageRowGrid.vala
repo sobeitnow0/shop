@@ -26,7 +26,6 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
     Gtk.Label release_description;
     Gtk.Label release_single_label;
     AppStream.Release? newest = null;
-    private Gtk.FlowBox app_info_flow;
 
     public InstalledPackageRowGrid (AppCenterCore.Package package, Gtk.SizeGroup? info_size_group, Gtk.SizeGroup? action_size_group, bool show_uninstall = true) {
         base (package, info_size_group, action_size_group, show_uninstall);
@@ -34,10 +33,8 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
     }
 
     construct {
+        margin_bottom = 12;
         updates_view = true;
-
-        app_info_flow = new Gtk.FlowBox ();
-
         app_version = new Gtk.Label (null);
         app_version.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         app_version.valign = Gtk.Align.START;
@@ -62,6 +59,7 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
 
         release_expander_label = new Gtk.Label ("");
         release_expander_label.wrap = true;
+        release_expander_label.xalign = 0;
         release_expander_label.use_markup = true;
         release_expander.set_label_widget (release_expander_label);
 
@@ -81,9 +79,7 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         set_widget_visibility (release_stack, false);
 
         info_grid.attach (app_version, 1, 1, 1, 1);
-        app_info_flow.add (info_grid);
-        app_info_flow.add (release_stack);
-        attach (app_info_flow, 2, 0, 1, 2);
+        attach (release_stack, 0, 1, 1, 1);
     }
 
     protected override void set_up_package (uint icon_size = 48) {

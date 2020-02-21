@@ -106,6 +106,18 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         });
 
         show.connect (on_view_mode_changed);
+
+        size_allocate.connect (() => {
+            int width = 0;
+            get_size (out width, null);
+            if (width > 532) {
+                search_entry.width_chars = 22;
+                search_entry.placeholder_text = _("Search Apps");
+            } else {
+                search_entry.width_chars = 9;
+                search_entry.placeholder_text = _("Search");
+            }
+        });
     }
 
     construct {
@@ -165,6 +177,7 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         custom_title_stack.set_visible_child (view_mode_revealer);
 
         search_entry = new Gtk.SearchEntry ();
+        search_entry.width_chars = 14;
         search_entry.valign = Gtk.Align.CENTER;
         search_entry.placeholder_text = _("Search Apps");
 

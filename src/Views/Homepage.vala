@@ -66,11 +66,13 @@ namespace AppCenter {
 
 #if POP_OS
             var pop_banner_copy_1 = new Gtk.Label (_("EXPLORE YOUR HORIZONS AND"));
+            pop_banner_copy_1.margin_top = pop_banner_copy_1.margin_start = 38;
             pop_banner_copy_1.xalign = 0;
             pop_banner_copy_1.hexpand = true;
             pop_banner_copy_1.wrap = true;
 
             var pop_banner_copy_2 = new Gtk.Label (_("UNLEASH YOUR POTENTIAL"));
+            pop_banner_copy_2.margin_start = pop_banner_copy_2.margin_end = 37;
             pop_banner_copy_2.xalign = 0;
             pop_banner_copy_2.hexpand = true;
             pop_banner_copy_2.wrap = true;
@@ -82,6 +84,7 @@ namespace AppCenter {
             pop_banner.attach (pop_banner_copy_2, 0, 1, 1, 1);
 
             var featured_label = new Gtk.Label (_("Pop!_Picks"));
+            featured_label.halign = Gtk.Align.START;
             featured_label.get_style_context ().add_class ("h4");
             featured_label.xalign = 0;
 
@@ -139,6 +142,7 @@ namespace AppCenter {
             trending_revealer.add (trending_grid );
 
             var categories_label = new Gtk.Label (_("Categories"));
+            categories_label.halign = Gtk.Align.START;
             categories_label.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
             categories_label.xalign = 0;
             categories_label.margin_start = 12;

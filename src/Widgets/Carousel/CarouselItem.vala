@@ -42,6 +42,7 @@ public class AppCenter.Widgets.CarouselItem : Gtk.FlowBoxChild {
         category_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         var grid = new Gtk.Grid ();
+        grid.halign = Gtk.Align.START;
         grid.column_spacing = 12;
         grid.row_spacing = 3;
         grid.margin = 6;

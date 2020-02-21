@@ -51,6 +51,7 @@ public abstract class AppCenter.Widgets.AbstractPackageRowGrid : AbstractAppCont
         inner_image.pixel_size = 48;
 
         package_name.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
+        package_name.wrap = true;
         package_name.valign = Gtk.Align.END;
         package_name.xalign = 0;
 
@@ -65,7 +66,7 @@ public abstract class AppCenter.Widgets.AbstractPackageRowGrid : AbstractAppCont
         action_stack.margin_top = 10;
         action_stack.valign = Gtk.Align.START;
 
-        //  attach (info_grid, 0, 0, 1, 1);
+        attach (info_grid, 0, 0, 1, 1);
         attach (action_stack, 3, 0, 1, 1);
     }
 }
