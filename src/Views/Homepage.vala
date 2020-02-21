@@ -66,33 +66,20 @@ namespace AppCenter {
 
 #if POP_OS
             var pop_banner_copy_1 = new Gtk.Label (_("EXPLORE YOUR HORIZONS AND"));
-            pop_banner_copy_1.expand = false;
-            pop_banner_copy_1.halign = Gtk.Align.START;
-            pop_banner_copy_1.margin_start = 48;
-            pop_banner_copy_1.margin_top = 38;
-            pop_banner_copy_1.yalign = 0;
-
-            // FIXME: For some reason this isn't working right. Toggling it in
-            // the inspector fixes the alignment.
-            pop_banner_copy_1.vexpand = false;
+            pop_banner_copy_1.xalign = 0;
+            pop_banner_copy_1.hexpand = true;
+            pop_banner_copy_1.wrap = true;
 
             var pop_banner_copy_2 = new Gtk.Label (_("UNLEASH YOUR POTENTIAL"));
-            pop_banner_copy_2.halign = Gtk.Align.START;
-            pop_banner_copy_2.margin_start = 48;
-            pop_banner_copy_2.yalign = 0;
-
-            var pop_banner_copy_area = new Gtk.Grid ();
-            pop_banner_copy_area.halign = Gtk.Align.CENTER;
-            pop_banner_copy_area.hexpand = true;
-            //  pop_banner_copy_area.width_request = 750;
-            pop_banner_copy_area.attach (pop_banner_copy_1, 0, 0, 1, 1);
-            pop_banner_copy_area.attach (pop_banner_copy_2, 0, 1, 1, 1);
-
+            pop_banner_copy_2.xalign = 0;
+            pop_banner_copy_2.hexpand = true;
+            pop_banner_copy_2.wrap = true;
+            
             var pop_banner = new Gtk.Grid ();
             pop_banner.height_request = 300;
-            pop_banner.hexpand = true;
             pop_banner.get_style_context ().add_class ("pop-banner");
-            pop_banner.attach (pop_banner_copy_area, 0, 0, 1, 1);
+            pop_banner.attach (pop_banner_copy_1, 0, 0, 1, 1);
+            pop_banner.attach (pop_banner_copy_2, 0, 1, 1, 1);
 
             var featured_label = new Gtk.Label (_("Pop!_Picks"));
             featured_label.get_style_context ().add_class ("h4");

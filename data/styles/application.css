@@ -18,12 +18,18 @@
  @import url("categories.css");
 
 .pop-banner {
+    padding: 38px;
     background-size: auto 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-image:
         -gtk-scaled(url("resource:///io/elementary/appcenter/pop-banner.png")),
         linear-gradient(#003e6c 6%, #f4d3d6 52%, #abdcdc);
+    color: #fff;
+}
+
+.pop-banner label,
+.pop-banner label:backdrop {
     color: #fff;
 }
 
