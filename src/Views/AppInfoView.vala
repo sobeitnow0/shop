@@ -80,13 +80,12 @@ namespace AppCenter.Views {
 
             if (screenshots.length > 0) {
                 app_screenshots = new Gtk.Stack ();
-                //  app_screenshots.width_request = 800;
                 //  app_screenshots.height_request = 500;
                 app_screenshots.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
-                app_screenshots.halign = Gtk.Align.CENTER;
+                app_screenshots.halign = Gtk.Align.FILL;
 
                 screenshot_previous = new Gtk.Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
-                screenshot_previous.expand = true;
+                screenshot_previous.hexpand = true;
                 screenshot_previous.halign = Gtk.Align.START;
                 screenshot_previous.valign = Gtk.Align.CENTER;
 
@@ -135,6 +134,7 @@ namespace AppCenter.Views {
                         screenshot_next.sensitive = false;
                     }
                 });
+                //  app_screenshots.size_allocate.connect (resize_screenshots);
 
                 screenshot_arrows = new Gtk.Grid ();
                 screenshot_arrows.add (screenshot_previous);
@@ -748,17 +748,28 @@ namespace AppCenter.Views {
             });
         }
 
+        private void resize_screenshots (Gtk.Widget? stack, Gtk.Allocation allocation) {
+            int width = allocation.width;
+            double p_height = width / 1.6;
+            int height = (int)p_height;
+
+            app_screenshots.height_request = height;
+            return;
+        }
+
         // We need to first download the screenshot locally so that it doesn't freeze the interface.
         private void load_screenshot (string path) {
-            var scale_factor = get_scale_factor ();
             try {
-                var pixbuf = new Gdk.Pixbuf.from_file_at_scale (path, 800 * scale_factor, 600 * scale_factor, true);
-                var image = new Gtk.Image ();
+                //  var pixbuf = new Gdk.Pixbuf.from_file_at_scale (path, 800 * scale_factor, 600 * scale_factor, true);
+                //  var image = new Gtk.Image ();
                 //  image.width_request = 800;
                 //  image.height_request = 500;
-                image.icon_name = "image-x-generic";
-                image.halign = Gtk.Align.CENTER;
-                image.gicon = pixbuf;
+                //  image.icon_name = "image-x-generic";
+                //  image.halign = Gtk.Align.CENTER;
+                //  image.gicon = pixbuf;
+                AppCenter.Widgets.AppScreenshot image = new AppCenter.Widgets.AppScreenshot ();
+                image.set_path (path);
+                image.set_parent (app_screenshots);
 
                 Idle.add (() => {
                     image.show ();
