@@ -17,60 +17,51 @@
  *
  * Authored by: Ian Santopietro <ian@system76.com>
  */
-
 public class AppCenter.Widgets.AppScreenshot : Gtk.DrawingArea {
-    private string file_path = null;
-    private Gtk.Widget? parent_widget = null;
-
+    private string file_path;
+    private double aspect_ratio;
+    private Gdk.Pixbuf? pixbuf;
+    private int pixbuf_height;
     construct {
-        expand = true;
+        hexpand = true;
         halign = Gtk.Align.FILL;
-        set_size_request (100, 100);
-
-        draw.connect (draw_callback);
     }
-
     public void set_path (string path_text) {
+        int width, height;
         file_path = path_text;
-        return;
+        Gdk.Pixbuf.get_file_info (file_path, out width, out height);
+        aspect_ratio = (double) width / height;
+        try {
+            pixbuf = new Gdk.Pixbuf.from_file (file_path);
+            pixbuf_height = height;
+        }
+        catch (Error e) {
+            critical ("Couldn't load pixbuf: %s", e.message);
+            pixbuf = null;
+        }
     }
-
-    public void set_parent (Gtk.Widget? parent) {
-        parent_widget = parent;
-        return;
-    }
-
-    private bool draw_callback (Gtk.Widget? screenshot, Cairo.Context cr) {
-        int width = parent_widget.get_allocated_width ();
-        int height = parent_widget.get_allocated_height ();
-        var scale = get_scale_factor ();
-        
-        var pixbuf = new Gdk.Pixbuf.from_file_at_scale (
-            file_path,
-            width,
-            height,
-            true
-        );
-        Gdk.cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+    protected override bool draw (Cairo.Context cr) {
+        if (pixbuf == null)
+            return Gdk.EVENT_PROPAGATE;
+        int height = get_allocated_height ();
+        double scale = (double) height / pixbuf_height;
         cr.scale (scale, scale);
+        Gdk.cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
         cr.paint ();
-
-        return false;
+        return Gdk.EVENT_PROPAGATE;
     }
-
-    public virtual Gtk.SizeRequestMode get_size_request () {
+    protected override Gtk.SizeRequestMode get_request_mode () {
         return Gtk.SizeRequestMode.HEIGHT_FOR_WIDTH;
     }
-
-    public virtual void get_preferred_height (out int minimum_height, out int natural_height) {
-        minimum_height = 100;
-        double val = get_allocated_width () / 1.6;
-        natural_height = (int)val;
+    protected override void get_preferred_height (out int min, out int nat) {
+        get_preferred_height_for_width (
+            get_allocated_width (),
+            out min,
+            out nat
+        );
     }
-
-    public virtual void get_preferred_height_for_width (int width, out int minimum_height, out int natural_height) {
-        minimum_height = 100;
-        double val = width / 1.6;
-        natural_height = (int)val;
+    protected override void get_preferred_height_for_width (int width, out int min, out int nat) {
+        double val = width / aspect_ratio;
+        min = nat = (int) val;
     }
 }

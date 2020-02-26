@@ -134,7 +134,6 @@ namespace AppCenter.Views {
                         screenshot_next.sensitive = false;
                     }
                 });
-                //  app_screenshots.size_allocate.connect (resize_screenshots);
 
                 screenshot_arrows = new Gtk.Grid ();
                 screenshot_arrows.add (screenshot_previous);
@@ -748,15 +747,6 @@ namespace AppCenter.Views {
             });
         }
 
-        private void resize_screenshots (Gtk.Widget? stack, Gtk.Allocation allocation) {
-            int width = allocation.width;
-            double p_height = width / 1.6;
-            int height = (int)p_height;
-
-            app_screenshots.height_request = height;
-            return;
-        }
-
         // We need to first download the screenshot locally so that it doesn't freeze the interface.
         private void load_screenshot (string path) {
             try {
@@ -769,7 +759,6 @@ namespace AppCenter.Views {
                 //  image.gicon = pixbuf;
                 AppCenter.Widgets.AppScreenshot image = new AppCenter.Widgets.AppScreenshot ();
                 image.set_path (path);
-                image.set_parent (app_screenshots);
 
                 Idle.add (() => {
                     image.show ();
