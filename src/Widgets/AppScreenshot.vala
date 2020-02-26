@@ -22,10 +22,12 @@ public class AppCenter.Widgets.AppScreenshot : Gtk.DrawingArea {
     private double aspect_ratio;
     private Gdk.Pixbuf? pixbuf;
     private int pixbuf_height;
+    
     construct {
         hexpand = true;
         halign = Gtk.Align.FILL;
     }
+    
     public void set_path (string path_text) {
         int width, height;
         file_path = path_text;
@@ -40,6 +42,7 @@ public class AppCenter.Widgets.AppScreenshot : Gtk.DrawingArea {
             pixbuf = null;
         }
     }
+    
     protected override bool draw (Cairo.Context cr) {
         if (pixbuf == null)
             return Gdk.EVENT_PROPAGATE;
@@ -50,9 +53,11 @@ public class AppCenter.Widgets.AppScreenshot : Gtk.DrawingArea {
         cr.paint ();
         return Gdk.EVENT_PROPAGATE;
     }
+    
     protected override Gtk.SizeRequestMode get_request_mode () {
         return Gtk.SizeRequestMode.HEIGHT_FOR_WIDTH;
     }
+    
     protected override void get_preferred_height (out int min, out int nat) {
         get_preferred_height_for_width (
             get_allocated_width (),
@@ -60,6 +65,7 @@ public class AppCenter.Widgets.AppScreenshot : Gtk.DrawingArea {
             out nat
         );
     }
+    
     protected override void get_preferred_height_for_width (int width, out int min, out int nat) {
         double val = width / aspect_ratio;
         min = nat = (int) val;
