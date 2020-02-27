@@ -240,25 +240,25 @@ namespace AppCenter.Views {
 
             var homepage_url = package_component.get_url (AppStream.UrlKind.HOMEPAGE);
             if (homepage_url != null) {
-                var website_button = new UrlButton (_("Homepage"), homepage_url, "web-browser-symbolic");
+                var website_button = new UrlButton ("", homepage_url, "web-browser-symbolic");
                 links_grid.add (website_button);
             }
 
             var translate_url = package_component.get_url (AppStream.UrlKind.TRANSLATE);
             if (translate_url != null) {
-                var translate_button = new UrlButton (_("Suggest Translations"), translate_url, "preferences-desktop-locale-symbolic");
+                var translate_button = new UrlButton ("", translate_url, "preferences-desktop-locale-symbolic");
                 links_grid.add (translate_button);
             }
 
             var bugtracker_url = package_component.get_url (AppStream.UrlKind.BUGTRACKER);
             if (bugtracker_url != null) {
-                var bugtracker_button = new UrlButton (_("Report a Problem"), bugtracker_url, "bug-symbolic");
+                var bugtracker_button = new UrlButton ("", bugtracker_url, "bug-symbolic");
                 links_grid.add (bugtracker_button);
             }
 
             var help_url = package_component.get_url (AppStream.UrlKind.HELP);
             if (help_url != null) {
-                var help_button = new UrlButton (_("Help"), help_url, "dialog-question-symbolic");
+                var help_button = new UrlButton ("", help_url, "dialog-question-symbolic");
                 links_grid.add (help_button);
             }
 
@@ -335,7 +335,7 @@ namespace AppCenter.Views {
             version_combo.pack_start (renderer, true);
             version_combo.add_attribute (renderer, "text", 1);
 
-            action_stack.valign = Gtk.Align.END;
+            action_stack.valign = Gtk.Align.START;
             action_stack.halign = Gtk.Align.END;
             action_stack.hexpand = true;
 
@@ -345,21 +345,34 @@ namespace AppCenter.Views {
             progress_grid.margin_top = 12;
             button_grid.margin_top = progress_grid.margin_top;
 
-            var header_grid = new Gtk.Grid ();
-            header_grid.column_spacing = 12;
-            header_grid.row_spacing = 6;
-            header_grid.hexpand = true;
-            header_grid.halign = Gtk.Align.CENTER;
-            header_grid.valign = Gtk.Align.CENTER;
-            header_grid.margin = content_grid.margin / 2;
+            var details_grid = new Gtk.Grid ();
+            details_grid.column_spacing = 12;
+            details_grid.row_spacing = 6;
+            details_grid.halign = Gtk.Align.CENTER;
+            details_grid.valign = Gtk.Align.CENTER;
+            details_grid.attach (image, 0, 0, 1, 3);
+            details_grid.attach (package_name, 1, 0);
+            details_grid.attach (package_author, 1, 1, 2);
+            details_grid.attach (version_combo_revealer, 1, 2, 2);
+            details_grid.attach (app_version, 2, 0);
+
+            var header_flow = new Gtk.FlowBox ();
+            header_flow.min_children_per_line = 1;
+            header_flow.max_children_per_line = 2;
+            header_flow.hexpand = true;
+            header_flow.halign = Gtk.Align.FILL;
+            header_flow.valign = Gtk.Align.CENTER;
+            header_flow.margin = content_grid.margin / 2;
+            header_flow.add (details_grid);
+            header_flow.add (action_stack);
             // Must be wide enough to fit long package name and progress bar
             //  header_grid.width_request = content_grid.width_request + 2 * (content_grid.margin - header_grid.margin);
-            header_grid.attach (image, 0, 0, 1, 3);
-            header_grid.attach (package_name, 1, 0);
-            header_grid.attach (package_author, 1, 1, 2);
-            header_grid.attach (version_combo_revealer, 1, 2, 2);
-            header_grid.attach (app_version, 2, 0);
-            header_grid.attach (action_stack, 3, 0);
+            //  header_grid.attach (image, 0, 0, 1, 3);
+            //  header_grid.attach (package_name, 1, 0);
+            //  header_grid.attach (package_author, 1, 1, 2);
+            //  header_grid.attach (version_combo_revealer, 1, 2, 2);
+            //  header_grid.attach (app_version, 2, 0);
+            //  header_grid.attach (action_stack, 3, 0);
 
             if (!package.is_local) {
                 size_label = new Widgets.SizeLabel ();
@@ -369,13 +382,13 @@ namespace AppCenter.Views {
 
                 action_button_group.add_widget (size_label);
 
-                header_grid.attach (size_label, 3, 1);
+                //  header_grid.attach (size_label, 3, 1);
             }
 
             var header_box = new Gtk.Grid ();
             header_box.get_style_context ().add_class ("banner");
             header_box.hexpand = true;
-            header_box.add (header_grid);
+            header_box.add (header_flow);
 
             var footer_grid = new Gtk.Grid ();
             footer_grid.halign = Gtk.Align.CENTER;
@@ -446,7 +459,7 @@ namespace AppCenter.Views {
                             break;
                     }
                 }
-                var license_button = new UrlButton (_(license_copy), license_url, "text-x-copying-symbolic");
+                var license_button = new UrlButton ("", license_url, "text-x-copying-symbolic");
                 footer_grid.add (license_button);
             }
 
