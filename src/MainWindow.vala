@@ -122,7 +122,7 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
 
     construct {
         icon_name = "system-software-install";
-        //  set_size_request (910, 640);
+        set_size_request (453, 500);
 
         int window_x, window_y;
         int window_width, window_height;
@@ -169,6 +169,9 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         view_mode_revealer.add (view_mode_overlay);
 
         homepage_header = new Gtk.Label (null);
+        homepage_header.wrap = true;
+        homepage_header.lines = 1;
+        homepage_header.ellipsize = Pango.EllipsizeMode.END;
         homepage_header.get_style_context ().add_class (Gtk.STYLE_CLASS_TITLE);
 
         custom_title_stack = new Gtk.Stack ();
@@ -357,7 +360,9 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         if (custom_header != null) {
             homepage_header.label = custom_header;
             custom_title_stack.visible_child = homepage_header;
+            view_mode_revealer.visible = false;
         } else {
+            view_mode_revealer.visible = true;
             custom_title_stack.visible_child = view_mode_revealer;
         }
 
@@ -398,6 +403,7 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         if (search_entry.text.length >= VALID_QUERY_LENGTH) {
             stack.visible_child = search_view;
             search_entry.sensitive = !search_view.viewing_package;
+            headerbar.get_custom_title ().visible = !search_view.viewing_package;
         } else {
             if (view_mode.selected == homepage_view_id) {
                 stack.visible_child = homepage;

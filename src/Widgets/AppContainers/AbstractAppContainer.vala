@@ -121,7 +121,9 @@ namespace AppCenter {
             image.add (inner_image);
 
             package_author = new Gtk.Label (null);
+            package_author.wrap = true;
             package_name = new Gtk.Label (null);
+            package_name.wrap = true;
             package_summary = new Gtk.Label (null);
 
             action_button = new Widgets.HumbleButton ();
