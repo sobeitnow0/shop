@@ -175,7 +175,7 @@ namespace AppCenter {
             progress_bar.valign = Gtk.Align.CENTER;
             /* Request a width large enough for the longest text to stop width of
              * progress bar jumping around, but allow space for long package names */
-            //  progress_bar.width_request = 250;
+            progress_bar.width_request = 222;
 
             cancel_button = new Gtk.Button.with_label (_("Cancel"));
             cancel_button.valign = Gtk.Align.END;
@@ -183,6 +183,7 @@ namespace AppCenter {
             cancel_button.clicked.connect (() => action_cancelled ());
             
             progress_flow = new Gtk.FlowBox ();
+            progress_flow.min_children_per_line = 2;
             progress_flow.set_size_request (270, -1);
             progress_flow.orientation = Gtk.Orientation.HORIZONTAL;
             progress_flow.halign = Gtk.Align.FILL;

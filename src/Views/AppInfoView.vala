@@ -348,7 +348,7 @@ namespace AppCenter.Views {
             var details_grid = new Gtk.Grid ();
             details_grid.column_spacing = 12;
             details_grid.row_spacing = 6;
-            details_grid.halign = Gtk.Align.CENTER;
+            details_grid.halign = Gtk.Align.START;
             details_grid.valign = Gtk.Align.CENTER;
             details_grid.attach (image, 0, 0, 1, 3);
             details_grid.attach (package_name, 1, 0);
