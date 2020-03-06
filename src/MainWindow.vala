@@ -326,12 +326,18 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         view_mode_revealer.reveal_child = !query_valid;
 
         if (query_valid) {
+            print ("Query valid");
             search_view.search (query, homepage.currently_viewed_category, mimetype);
             stack.visible_child = search_view;
+            view_mode_revealer.visible = false;
         } else {
+            print ("Query invalid");
             if (stack.visible_child == search_view && homepage.currently_viewed_category != null) {
                 return_button_history.poll_head ();
                 return_button.label = return_button_history.peek_head ();
+                view_mode_revealer.visible = false;
+            } else {
+                view_mode_revealer.visible = true;
             }
 
             search_view.reset ();
@@ -372,6 +378,10 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
             search_entry.placeholder_text = _("Search Apps");
         }
 
+        if (stack.visible_child == search_view) {
+            view_mode_revealer.visible = false;
+        }
+
         search_entry.sensitive = allow_search;
         search_entry.grab_focus_without_selecting ();
     }
@@ -403,14 +413,16 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         if (search_entry.text.length >= VALID_QUERY_LENGTH) {
             stack.visible_child = search_view;
             search_entry.sensitive = !search_view.viewing_package;
-            headerbar.get_custom_title ().visible = !search_view.viewing_package;
+            view_mode_revealer.visible = !search_view.viewing_package;
         } else {
             if (view_mode.selected == homepage_view_id) {
                 stack.visible_child = homepage;
                 search_entry.sensitive = !homepage.viewing_package;
+                view_mode_revealer.visible = !homepage.viewing_package;
             } else if (view_mode.selected == installed_view_id) {
                 stack.visible_child = installed_view;
                 search_entry.sensitive = false;
+                view_mode_revealer.visible = true;
             }
         }
     }
