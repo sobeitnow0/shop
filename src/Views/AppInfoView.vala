@@ -503,7 +503,7 @@ namespace AppCenter.Views {
 
             var scrolled = new Gtk.ScrolledWindow (null, null);
             scrolled.hscrollbar_policy = Gtk.PolicyType.NEVER;
-            //  scrolled.expand = true;
+            scrolled.expand = true;
             scrolled.add (grid);
 
             var toast = new Granite.Widgets.Toast (_("Link copied to clipboard"));
