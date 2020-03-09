@@ -316,7 +316,7 @@ namespace AppCenter.Views {
             version_liststore = new Gtk.ListStore (2, typeof (AppCenterCore.Package), typeof (string));
             version_combo = new Gtk.ComboBox.with_model (version_liststore);
             //  version_combo.halign = Gtk.Align.START;
-            //  version_combo.valign = Gtk.Align.START;
+            version_combo.valign = Gtk.Align.START;
             version_combo.changed.connect (() => {
                 Gtk.TreeIter iter;
                 AppCenterCore.Package selected_version;
@@ -334,15 +334,10 @@ namespace AppCenter.Views {
             version_combo.pack_start (renderer, true);
             version_combo.add_attribute (renderer, "text", 1);
 
-            //  action_stack.valign = Gtk.Align.START;
-            //  action_stack.halign = Gtk.Align.END;
-            //  action_stack.hexpand = true;
-
             /* This is required to stop any button movement when switch from button_grid to the
              * progress grid */
             progress_grid.margin_end = 6;
             progress_grid.margin_top = 12;
-            button_grid.margin_top = progress_grid.margin_top;
 
             var details_grid = new Gtk.Grid ();
             details_grid.column_spacing = 12;

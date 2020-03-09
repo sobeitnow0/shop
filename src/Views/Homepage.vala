@@ -68,13 +68,13 @@ namespace AppCenter {
             var pop_banner_copy_1 = new Gtk.Label (_("EXPLORE YOUR HORIZONS AND"));
             pop_banner_copy_1.margin_top = pop_banner_copy_1.margin_start = 38;
             pop_banner_copy_1.xalign = 0;
-            //  pop_banner_copy_1.hexpand = true;
+            pop_banner_copy_1.hexpand = true;
             pop_banner_copy_1.wrap = true;
 
             var pop_banner_copy_2 = new Gtk.Label (_("UNLEASH YOUR POTENTIAL"));
             pop_banner_copy_2.margin_start = pop_banner_copy_2.margin_end = 37;
             pop_banner_copy_2.xalign = 0;
-            //  pop_banner_copy_2.hexpand = true;
+            pop_banner_copy_2.hexpand = true;
             pop_banner_copy_2.wrap = true;
             
             var pop_banner = new Gtk.Grid ();
@@ -85,7 +85,6 @@ namespace AppCenter {
             pop_banner.attach (pop_banner_copy_2, 0, 1, 1, 1);
 
             var featured_label = new Gtk.Label (_("Pop!_Picks"));
-            //  featured_label.halign = Gtk.Align.START;
             featured_label.get_style_context ().add_class ("h4");
             featured_label.xalign = 0;
 
@@ -152,7 +151,6 @@ namespace AppCenter {
         construct {
 #endif
             category_flow = new Widgets.CategoryFlowBox ();
-            //  category_flow.valign = Gtk.Align.START;
 
             var grid = new Gtk.Grid ();
 #if HOMEPAGE

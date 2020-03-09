@@ -30,8 +30,8 @@ public class AppCenter.Widgets.CategoryItem : Gtk.FlowBoxChild {
     construct {
         var display_image = new Gtk.Image ();
         display_image.icon_size = Gtk.IconSize.DIALOG;
-        //  display_image.valign = Gtk.Align.CENTER;
-        //  display_image.halign = Gtk.Align.END;
+        display_image.valign = Gtk.Align.CENTER;
+        display_image.halign = Gtk.Align.END;
 
         name_label = new Gtk.Label (null);
         name_label.wrap = true;
@@ -40,8 +40,8 @@ public class AppCenter.Widgets.CategoryItem : Gtk.FlowBoxChild {
         var grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.HORIZONTAL;
         grid.column_spacing = 6;
-        //  grid.halign = Gtk.Align.CENTER;
-        //  grid.valign = Gtk.Align.CENTER;
+        grid.halign = Gtk.Align.CENTER;
+        grid.valign = Gtk.Align.CENTER;
         grid.margin_top = 32;
         grid.margin_end = 16;
         grid.margin_bottom = 32;
@@ -50,7 +50,7 @@ public class AppCenter.Widgets.CategoryItem : Gtk.FlowBoxChild {
         grid.add (name_label);
 
         var expanded_grid = new Gtk.Grid ();
-        //  expanded_grid.expand = true;
+        expanded_grid.expand = true;
 #if POP_OS
         expanded_grid.margin = 6;
 #else
@@ -70,7 +70,7 @@ public class AppCenter.Widgets.CategoryItem : Gtk.FlowBoxChild {
         if (app_category.icon != "") {
             display_image.icon_name = app_category.icon;
             ((Gtk.Misc) name_label).xalign = 0;
-            //  name_label.halign = Gtk.Align.START;
+            name_label.halign = Gtk.Align.START;
         } else {
             display_image.destroy ();
             name_label.justify = Gtk.Justification.CENTER;

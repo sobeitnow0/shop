@@ -144,7 +144,6 @@ namespace AppCenter {
             });
 
             uninstall_button = new Gtk.Button.with_label (_("Uninstall"));
-            uninstall_button.margin_end = 12;
 
             uninstall_button_revealer = new Gtk.Revealer ();
             uninstall_button_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_LEFT;
@@ -173,7 +172,6 @@ namespace AppCenter {
             progress_bar.width_request = 222;
 
             cancel_button = new Gtk.Button.with_label (_("Cancel"));
-            cancel_button.margin_top = 6;
             cancel_button.valign = Gtk.Align.END;
             cancel_button.halign = Gtk.Align.CENTER;
             cancel_button.clicked.connect (() => action_cancelled ());
@@ -244,7 +242,6 @@ namespace AppCenter {
                 var overlay_gicon = plugin_host_package.get_icon (icon_size / 2, scale_factor);
 
                 var overlay_image = new Gtk.Image.from_gicon (overlay_gicon, badge_icon_size);
-                //  overlay_image.halign = overlay_image.valign = Gtk.Align.END;
                 overlay_image.pixel_size = badge_pixel_size;
                 image.add_overlay (overlay_image);
             } else {
@@ -252,7 +249,6 @@ namespace AppCenter {
 
                 if (is_os_updates) {
                     var overlay_image = new Gtk.Image.from_icon_name ("system-software-update", badge_icon_size);
-                    //  overlay_image.halign = overlay_image.valign = Gtk.Align.END;
                     overlay_image.pixel_size = badge_pixel_size;
 
                     image.add_overlay (overlay_image);

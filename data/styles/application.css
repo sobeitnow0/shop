@@ -61,17 +61,6 @@
     min-width: 18px;
 }
 
-.titlebar {
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.titlebar button {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
 .banner {
     background-color: @banner_bg_color;
     background-image:

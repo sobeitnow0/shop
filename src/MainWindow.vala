@@ -148,8 +148,7 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
         return_button_history = new Gee.LinkedList<string> ();
 
         view_mode = new Granite.Widgets.ModeButton ();
-        view_mode.margin_end = view_mode.margin_start = 12;
-        view_mode.margin_bottom = view_mode.margin_top = 7;
+        view_mode.margin_end = 12;
         homepage_view_id = view_mode.append_text (_("Home"));
         installed_view_id = view_mode.append_text (C_("view", "Installed"));
 
