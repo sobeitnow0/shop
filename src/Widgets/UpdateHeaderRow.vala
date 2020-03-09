@@ -52,11 +52,10 @@ namespace AppCenter.Widgets {
             updates_label = new Gtk.Label (null);
             ((Gtk.Misc) updates_label).xalign = 0;
             updates_label.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
-            //  updates_label.hexpand = true;
+            updates_label.hexpand = true;
 
             size_label = new SizeLabel ();
-            //  size_label.halign = Gtk.Align.END;
-            //  size_label.valign = Gtk.Align.CENTER;
+            size_label.margin_start = 12;
 
             attach (updates_label, 0, 0, 1, 1);
             attach (size_label, 0, 1, 1, 1);
