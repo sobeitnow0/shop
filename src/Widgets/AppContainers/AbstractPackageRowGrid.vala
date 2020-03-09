@@ -52,19 +52,19 @@ public abstract class AppCenter.Widgets.AbstractPackageRowGrid : AbstractAppCont
 
         package_name.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
         package_name.wrap = true;
-        package_name.valign = Gtk.Align.END;
+        //  package_name.valign = Gtk.Align.END;
         package_name.xalign = 0;
 
         info_grid = new Gtk.Grid ();
         info_grid.column_spacing = 12;
         info_grid.row_spacing = 6;
-        info_grid.valign = Gtk.Align.START;
+        //  info_grid.valign = Gtk.Align.START;
         info_grid.attach (image, 0, 0, 1, 2);
         info_grid.attach (package_name, 1, 0, 1, 1);
 
         action_stack.homogeneous = false;
         action_stack.margin_top = 10;
-        action_stack.valign = Gtk.Align.START;
+        //  action_stack.valign = Gtk.Align.START;
 
         attach (info_grid, 0, 0, 1, 1);
         attach (action_stack, 3, 0, 1, 1);

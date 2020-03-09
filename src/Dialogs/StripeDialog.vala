@@ -79,13 +79,13 @@ public class AppCenter.Widgets.StripeDialog : Gtk.Dialog {
 
     construct {
         var image = new Gtk.Image.from_icon_name ("payment-card", Gtk.IconSize.DIALOG);
-        image.valign = Gtk.Align.START;
+        //  image.valign = Gtk.Align.START;
 
         var overlay_image = new Gtk.Image.from_icon_name ("system-software-install", Gtk.IconSize.LARGE_TOOLBAR);
-        overlay_image.halign = overlay_image.valign = Gtk.Align.END;
+        //  overlay_image.halign = overlay_image.valign = Gtk.Align.END;
 
         var overlay = new Gtk.Overlay ();
-        overlay.valign = Gtk.Align.START;
+        //  overlay.valign = Gtk.Align.START;
         overlay.add (image);
         overlay.add_overlay (overlay_image);
 
@@ -100,7 +100,7 @@ public class AppCenter.Widgets.StripeDialog : Gtk.Dialog {
         secondary_label.xalign = 0;
 
         email_entry = new Gtk.Entry ();
-        email_entry.hexpand = true;
+        //  email_entry.hexpand = true;
         email_entry.input_purpose = Gtk.InputPurpose.EMAIL;
         email_entry.margin_bottom = 6;
         email_entry.placeholder_text = _("Email");
@@ -113,7 +113,7 @@ public class AppCenter.Widgets.StripeDialog : Gtk.Dialog {
         });
 
         card_number_entry = new AppCenter.Widgets.CardNumberEntry ();
-        card_number_entry.hexpand = true;
+        //  card_number_entry.hexpand = true;
         card_number_entry.changed.connect (() => {
             validate (1, card_number_entry.card_number);
         });
@@ -121,7 +121,7 @@ public class AppCenter.Widgets.StripeDialog : Gtk.Dialog {
         card_number_entry.bind_property ("has-focus", card_number_entry, "visibility");
 
         card_expiration_entry = new Gtk.Entry ();
-        card_expiration_entry.hexpand = true;
+        //  card_expiration_entry.hexpand = true;
         card_expiration_entry.max_length = 5;
         /// TRANSLATORS: Don't change the order, only transliterate
         card_expiration_entry.placeholder_text = _("MM / YY");
@@ -141,7 +141,7 @@ public class AppCenter.Widgets.StripeDialog : Gtk.Dialog {
         });
 
         card_cvc_entry = new Gtk.Entry ();
-        card_cvc_entry.hexpand = true;
+        //  card_cvc_entry.hexpand = true;
         card_cvc_entry.input_purpose = Gtk.InputPurpose.DIGITS;
         card_cvc_entry.max_length = 4;
         card_cvc_entry.placeholder_text = _("CVC");
@@ -241,12 +241,12 @@ public class AppCenter.Widgets.StripeDialog : Gtk.Dialog {
             spinner.start ();
 
             var label = new Gtk.Label (_("Processing"));
-            label.hexpand = true;
+            //  label.hexpand = true;
             label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
             var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12);
-            box.valign = Gtk.Align.CENTER;
-            box.vexpand = true;
+            //  box.valign = Gtk.Align.CENTER;
+            //  box.vexpand = true;
 
             box.add (spinner);
             box.add (label);
@@ -279,11 +279,11 @@ public class AppCenter.Widgets.StripeDialog : Gtk.Dialog {
             var icon = new Gtk.Image.from_icon_name ("system-software-install", Gtk.IconSize.DIALOG);
 
             var overlay_icon = new Gtk.Image.from_icon_name ("dialog-warning", Gtk.IconSize.LARGE_TOOLBAR);
-            overlay_icon.halign = Gtk.Align.END;
-            overlay_icon.valign = Gtk.Align.END;
+            //  overlay_icon.halign = Gtk.Align.END;
+            //  overlay_icon.valign = Gtk.Align.END;
 
             var overlay = new Gtk.Overlay ();
-            overlay.valign = Gtk.Align.START;
+            //  overlay.valign = Gtk.Align.START;
             overlay.add (icon);
             overlay.add_overlay (overlay_icon);
 

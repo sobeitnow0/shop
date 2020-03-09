@@ -38,7 +38,7 @@ public class AppCenter.Widgets.NonCuratedWarningDialog : Granite.MessageDialog {
         secondary_text = _("“%s” is not curated by elementary and has not been reviewed for security, privacy, or system integration.").printf (app_name);
 
         var updates_icon = new Gtk.Image.from_icon_name ("system-software-update-symbolic", Gtk.IconSize.BUTTON);
-        updates_icon.valign = Gtk.Align.START;
+        //  updates_icon.valign = Gtk.Align.START;
 
         unowned Gtk.StyleContext updates_context = updates_icon.get_style_context ();
         updates_context.add_class ("updates");
@@ -51,7 +51,7 @@ public class AppCenter.Widgets.NonCuratedWarningDialog : Granite.MessageDialog {
         updates_label.xalign = 0;
 
         var unsandboxed_icon = new Gtk.Image.from_icon_name ("security-low-symbolic", Gtk.IconSize.BUTTON);
-        unsandboxed_icon.valign = Gtk.Align.START;
+        //  unsandboxed_icon.valign = Gtk.Align.START;
 
         unowned Gtk.StyleContext unsandboxed_context = unsandboxed_icon.get_style_context ();
         unsandboxed_context.add_class ("unsandboxed");

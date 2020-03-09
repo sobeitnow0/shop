@@ -49,7 +49,7 @@ namespace AppCenter.Widgets {
             var heading = new Gtk.Label ("<span weight='bold' size='larger'>" + heading_text + "</span>");
             heading.get_style_context ().add_class ("larger");
             heading.use_markup = true;
-            heading.halign = Gtk.Align.START;
+            //heading.halign = Gtk.Align.START;
 
             var grid = new Gtk.Grid ();
             grid.column_spacing = 12;

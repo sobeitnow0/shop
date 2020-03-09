@@ -25,7 +25,7 @@ public abstract class AppCenter.View : Gtk.Stack {
 
     construct {
         get_style_context ().add_class (Gtk.STYLE_CLASS_VIEW);
-        expand = true;
+        //  expand = true;
     }
 
     public virtual void show_package (

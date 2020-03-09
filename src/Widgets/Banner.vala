@@ -44,8 +44,8 @@ namespace AppCenter.Widgets {
 
             construct {
                 column_spacing = 24;
-                halign = Gtk.Align.CENTER;
-                valign = Gtk.Align.CENTER;
+                //  halign = Gtk.Align.CENTER;
+                //  valign = Gtk.Align.CENTER;
 
                 bool has_package = package != null;
 
@@ -132,7 +132,7 @@ namespace AppCenter.Widgets {
             height_request = 300;
 
             stack = new Gtk.Stack ();
-            stack.valign = Gtk.Align.CENTER;
+            //  stack.valign = Gtk.Align.CENTER;
             stack.transition_duration = TRANSITION_DURATION_MILLISECONDS;
             stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
             add (stack);

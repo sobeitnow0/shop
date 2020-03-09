@@ -182,12 +182,12 @@ namespace AppCenter.Views {
                         update_all_button.sensitive = false;
                     }
 
-                    update_all_button.valign = Gtk.Align.CENTER;
+                    //  update_all_button.valign = Gtk.Align.CENTER;
                     update_all_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
                     update_all_button.clicked.connect (on_update_all);
                     action_button_group.add_widget (update_all_button);
 
-                    header.add (update_all_button);
+                    header.attach (update_all_button, 1, 0, 1, 2);
                 }
 
                 header.show_all ();

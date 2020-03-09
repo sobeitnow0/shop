@@ -52,14 +52,14 @@ namespace AppCenter.Widgets {
             updates_label = new Gtk.Label (null);
             ((Gtk.Misc) updates_label).xalign = 0;
             updates_label.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
-            updates_label.hexpand = true;
+            //  updates_label.hexpand = true;
 
             size_label = new SizeLabel ();
-            size_label.halign = Gtk.Align.END;
-            size_label.valign = Gtk.Align.CENTER;
+            //  size_label.halign = Gtk.Align.END;
+            //  size_label.valign = Gtk.Align.CENTER;
 
-            add (updates_label);
-            add (size_label);
+            attach (updates_label, 0, 0, 1, 1);
+            attach (size_label, 0, 1, 1, 1);
         }
 
         public override void update (uint _update_numbers, uint64 _update_real_size, bool _is_updating, bool _using_flatpak) {
@@ -87,7 +87,7 @@ namespace AppCenter.Widgets {
 
         construct {
             label = new Gtk.Label (""); /* Should not be displayed before being updated */
-            label.hexpand = true;
+            //  label.hexpand = true;
             ((Gtk.Misc)label).xalign = 0;
 
             spinner = new Gtk.Spinner ();
@@ -100,14 +100,14 @@ namespace AppCenter.Widgets {
             store_data (_update_numbers, _update_real_size, _is_updating, _using_flatpak);
 
             if (is_updating) {
-                halign = Gtk.Align.CENTER;
+                //  halign = Gtk.Align.CENTER;
                 spinner.start ();
                 spinner.no_show_all = false;
                 spinner.show ();
                 label.label = _("Searching for updates…");
                 label.get_style_context ().remove_class (Granite.STYLE_CLASS_H4_LABEL);
             } else {
-                halign = Gtk.Align.FILL;
+                //  halign = Gtk.Align.FILL;
                 spinner.stop ();
                 spinner.no_show_all = true;
                 spinner.hide ();
@@ -121,7 +121,7 @@ namespace AppCenter.Widgets {
         construct {
             var label = new Gtk.Label (_("Drivers"));
             label.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
-            label.hexpand = true;
+            //  label.hexpand = true;
             ((Gtk.Misc)label).xalign = 0;
 
             add (label);

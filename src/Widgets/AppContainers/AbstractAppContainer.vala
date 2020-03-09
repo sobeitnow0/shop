@@ -162,9 +162,9 @@ namespace AppCenter {
             open_button.clicked.connect (launch_package_app);
 
             button_grid = new Gtk.Grid ();
-            button_grid.valign = Gtk.Align.CENTER;
-            button_grid.halign = Gtk.Align.END;
-            button_grid.hexpand = false;
+            //  button_grid.valign = Gtk.Align.CENTER;
+            //  button_grid.halign = Gtk.Align.END;
+            //  button_grid.hexpand = false;
 
             button_grid.add (uninstall_button_revealer);
             button_grid.add (action_button_revealer);
@@ -172,25 +172,25 @@ namespace AppCenter {
 
             progress_bar = new Gtk.ProgressBar ();
             progress_bar.show_text = true;
-            progress_bar.hexpand = true;
-            progress_bar.halign = Gtk.Align.FILL;
-            progress_bar.valign = Gtk.Align.CENTER;
+            //  progress_bar.hexpand = true;
+            //  progress_bar.halign = Gtk.Align.FILL;
+            //  progress_bar.valign = Gtk.Align.CENTER;
             /* Request a width large enough for the longest text to stop width of
              * progress bar jumping around, but allow space for long package names */
             progress_bar.width_request = 222;
 
             cancel_button = new Gtk.Button.with_label (_("Cancel"));
-            cancel_button.valign = Gtk.Align.END;
-            cancel_button.halign = Gtk.Align.CENTER;
+            //  cancel_button.valign = Gtk.Align.END;
+            //  cancel_button.halign = Gtk.Align.CENTER;
             cancel_button.clicked.connect (() => action_cancelled ());
             
             progress_flow = new Gtk.FlowBox ();
             progress_flow.min_children_per_line = 1;
             progress_flow.set_size_request (222, -1);
             progress_flow.orientation = Gtk.Orientation.HORIZONTAL;
-            progress_flow.halign = Gtk.Align.FILL;
-            progress_flow.valign = Gtk.Align.FILL;
-            progress_flow.hexpand = true;
+            //  progress_flow.halign = Gtk.Align.FILL;
+            //  progress_flow.valign = Gtk.Align.FILL;
+            //  progress_flow.hexpand = true;
             progress_flow.add (progress_bar);
             progress_flow.add (cancel_button);
 
@@ -208,8 +208,8 @@ namespace AppCenter {
             action_button_group.add_widget (open_button);
 
             action_stack = new Gtk.Stack ();
-            action_stack.hexpand = false;
-            action_stack.halign = Gtk.Align.END;
+            //  action_stack.hexpand = false;
+            //  action_stack.halign = Gtk.Align.END;
             action_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
             action_stack.add_named (button_grid, "buttons");
             action_stack.add_named (progress_flow, "progress");
@@ -262,7 +262,7 @@ namespace AppCenter {
                 var overlay_gicon = plugin_host_package.get_icon (icon_size / 2, scale_factor);
 
                 var overlay_image = new Gtk.Image.from_gicon (overlay_gicon, badge_icon_size);
-                overlay_image.halign = overlay_image.valign = Gtk.Align.END;
+                //  overlay_image.halign = overlay_image.valign = Gtk.Align.END;
                 overlay_image.pixel_size = badge_pixel_size;
                 image.add_overlay (overlay_image);
             } else {
@@ -270,7 +270,7 @@ namespace AppCenter {
 
                 if (is_os_updates) {
                     var overlay_image = new Gtk.Image.from_icon_name ("system-software-update", badge_icon_size);
-                    overlay_image.halign = overlay_image.valign = Gtk.Align.END;
+                    //  overlay_image.halign = overlay_image.valign = Gtk.Align.END;
                     overlay_image.pixel_size = badge_pixel_size;
 
                     image.add_overlay (overlay_image);
