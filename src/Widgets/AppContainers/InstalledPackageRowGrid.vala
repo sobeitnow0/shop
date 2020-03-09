@@ -83,7 +83,7 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
 
         info_grid.attach (app_version, 1, 1, 1, 1);
         //  info_grid.hexpand = true;
-        attach (release_stack, 0, 1, 2, 1);
+        attach (release_stack, 0, 1, 4, 1);
     }
 
     protected override void set_up_package (uint icon_size = 48) {

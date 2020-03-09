@@ -45,6 +45,7 @@ public abstract class AppCenter.Widgets.AbstractPackageRowGrid : AbstractAppCont
         margin = 6;
         margin_start = 12;
         margin_end = 12;
+        hexpand = true;
 
         inner_image.icon_size = Gtk.IconSize.DIALOG;
         /* Needed to enforce size on icons from Filesystem/Remote */
@@ -52,7 +53,7 @@ public abstract class AppCenter.Widgets.AbstractPackageRowGrid : AbstractAppCont
 
         package_name.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
         package_name.wrap = true;
-        //  package_name.valign = Gtk.Align.END;
+        package_name.hexpand = true;
         package_name.xalign = 0;
 
         info_grid = new Gtk.Grid ();

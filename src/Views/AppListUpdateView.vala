@@ -48,6 +48,7 @@ namespace AppCenter.Views {
         }
 
         construct {
+            hexpand = true;
             list_box.set_header_func ((Gtk.ListBoxUpdateHeaderFunc) row_update_header);
 
             update_mutex = GLib.Mutex ();

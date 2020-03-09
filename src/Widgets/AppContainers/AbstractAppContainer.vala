@@ -173,6 +173,7 @@ namespace AppCenter {
             progress_bar.width_request = 222;
 
             cancel_button = new Gtk.Button.with_label (_("Cancel"));
+            cancel_button.margin_top = 6;
             cancel_button.valign = Gtk.Align.END;
             cancel_button.halign = Gtk.Align.CENTER;
             cancel_button.clicked.connect (() => action_cancelled ());
