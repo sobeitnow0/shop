@@ -143,7 +143,6 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
 
         return_button = new Gtk.Button ();
         return_button.no_show_all = true;
-        //  return_button.valign = Gtk.Align.CENTER;
         return_button.get_style_context ().add_class ("back-button");
         return_button_history = new Gee.LinkedList<string> ();
 
@@ -180,7 +179,6 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
 
         search_entry = new Gtk.SearchEntry ();
         search_entry.width_chars = 14;
-        //  search_entry.valign = Gtk.Align.CENTER;
         search_entry.placeholder_text = _("Search Apps");
 
         spinner = new Gtk.Spinner ();
@@ -188,7 +186,6 @@ public class AppCenter.MainWindow : Gtk.ApplicationWindow {
 #if POP_OS
         var repos_button = new Gtk.Button.from_icon_name ("preferences-system-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         repos_button.tooltip_text = _("Edit Software Sources…");
-        //  repos_button.valign = Gtk.Align.CENTER;
         repos_button.clicked.connect (() => {
             try {
                 string[] args = {

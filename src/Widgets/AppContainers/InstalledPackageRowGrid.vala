@@ -37,11 +37,9 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         updates_view = true;
         app_version = new Gtk.Label (null);
         app_version.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        //  app_version.valign = Gtk.Align.START;
         ((Gtk.Misc) app_version).xalign = 0;
 
         progress_bar.width_request = 169;
-        //  progress_bar.halign = Gtk.Align.CENTER;
 
         release_description = new Gtk.Label (null);
         release_description.selectable = true;
@@ -51,7 +49,6 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         release_description.xalign = 0;
 
         release_expander = new Gtk.Expander ("");
-        //  release_expander.halign = release_expander.valign = Gtk.Align.START;
         release_expander.add (release_description);
         release_expander.visible = true;
         release_expander.show_all ();
@@ -71,7 +68,6 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         release_single_label.use_markup = true;
         release_single_label.wrap = true;
         release_single_label.xalign = 0;
-        //  release_single_label.halign = release_single_label.valign = Gtk.Align.START;
         release_single_label.visible = true;
         release_single_label.show_all ();
 

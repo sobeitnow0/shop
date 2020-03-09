@@ -24,8 +24,8 @@ public class AppCenter.Widgets.AppScreenshot : Gtk.DrawingArea {
     private int pixbuf_height;
     
     construct {
-        //  hexpand = true;
-        //  halign = Gtk.Align.FILL;
+        hexpand = true;
+        halign = Gtk.Align.FILL;
     }
     
     public void set_path (string path_text) {

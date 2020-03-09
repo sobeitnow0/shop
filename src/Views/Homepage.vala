@@ -142,7 +142,6 @@ namespace AppCenter {
             trending_revealer.add (trending_grid );
 
             var categories_label = new Gtk.Label (_("Categories"));
-            //  categories_label.halign = Gtk.Align.START;
             categories_label.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
             categories_label.xalign = 0;
             categories_label.margin_start = 12;

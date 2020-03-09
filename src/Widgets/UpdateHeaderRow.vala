@@ -99,14 +99,12 @@ namespace AppCenter.Widgets {
             store_data (_update_numbers, _update_real_size, _is_updating, _using_flatpak);
 
             if (is_updating) {
-                //  halign = Gtk.Align.CENTER;
                 spinner.start ();
                 spinner.no_show_all = false;
                 spinner.show ();
                 label.label = _("Searching for updates…");
                 label.get_style_context ().remove_class (Granite.STYLE_CLASS_H4_LABEL);
             } else {
-                //  halign = Gtk.Align.FILL;
                 spinner.stop ();
                 spinner.no_show_all = true;
                 spinner.hide ();
@@ -120,7 +118,6 @@ namespace AppCenter.Widgets {
         construct {
             var label = new Gtk.Label (_("Drivers"));
             label.get_style_context ().add_class (Granite.STYLE_CLASS_H4_LABEL);
-            //  label.hexpand = true;
             ((Gtk.Misc)label).xalign = 0;
 
             add (label);

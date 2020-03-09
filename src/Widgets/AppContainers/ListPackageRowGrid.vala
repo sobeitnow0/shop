@@ -27,8 +27,6 @@ public class AppCenter.Widgets.ListPackageRowGrid : AbstractPackageRowGrid {
     construct {
         package_summary = new Gtk.Label (null);
         package_summary.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        //  package_summary.hexpand = true;
-        //  package_summary.valign = Gtk.Align.START;
         ((Gtk.Misc) package_summary).xalign = 0;
 
         info_grid.attach (package_summary, 1, 1, 1, 1);
