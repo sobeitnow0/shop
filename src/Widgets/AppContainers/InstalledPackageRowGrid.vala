@@ -40,6 +40,10 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         app_version.valign = Gtk.Align.START;
         ((Gtk.Misc) app_version).xalign = 0;
 
+        progress_bar.width_request = 169;
+        progress_flow.width_request = 50;
+        progress_bar.halign = Gtk.Align.CENTER;
+
         release_description = new Gtk.Label (null);
         release_description.selectable = true;
         release_description.use_markup = true;
@@ -79,7 +83,8 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         set_widget_visibility (release_stack, false);
 
         info_grid.attach (app_version, 1, 1, 1, 1);
-        attach (release_stack, 0, 1, 1, 1);
+        info_grid.hexpand = true;
+        attach (release_stack, 0, 1, 2, 1);
     }
 
     protected override void set_up_package (uint icon_size = 48) {
