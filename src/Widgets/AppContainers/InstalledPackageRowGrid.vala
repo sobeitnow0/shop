@@ -41,7 +41,6 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         ((Gtk.Misc) app_version).xalign = 0;
 
         progress_bar.width_request = 169;
-        progress_flow.width_request = 50;
         //  progress_bar.halign = Gtk.Align.CENTER;
 
         release_description = new Gtk.Label (null);

@@ -82,12 +82,12 @@ namespace AppCenter.Views {
                 app_screenshots = new Gtk.Stack ();
                 //  app_screenshots.height_request = 500;
                 app_screenshots.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
-                //  app_screenshots.halign = Gtk.Align.FILL;
+                app_screenshots.halign = Gtk.Align.FILL;
 
                 screenshot_previous = new Gtk.Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
-                //  screenshot_previous.hexpand = true;
-                //  screenshot_previous.halign = Gtk.Align.START;
-                //  screenshot_previous.valign = Gtk.Align.CENTER;
+                screenshot_previous.hexpand = true;
+                screenshot_previous.halign = Gtk.Align.START;
+                screenshot_previous.valign = Gtk.Align.CENTER;
 
                 var previous_context = screenshot_previous.get_style_context ();
                 previous_context.add_class (Gtk.STYLE_CLASS_FLAT);
@@ -104,9 +104,9 @@ namespace AppCenter.Views {
                 });
 
                 screenshot_next = new Gtk.Button.from_icon_name ("go-next-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
-                //  screenshot_next.expand = true;
-                //  screenshot_next.halign = Gtk.Align.END;
-                //  screenshot_next.valign = Gtk.Align.CENTER;
+                screenshot_next.expand = true;
+                screenshot_next.halign = Gtk.Align.END;
+                screenshot_next.valign = Gtk.Align.CENTER;
 
                 var next_context = screenshot_next.get_style_context ();
                 next_context.add_class (Gtk.STYLE_CLASS_FLAT);
@@ -165,12 +165,12 @@ namespace AppCenter.Views {
                 });
 
                 screenshot_switcher = new Widgets.Switcher ();
-                //  screenshot_switcher.halign = Gtk.Align.CENTER;
+                screenshot_switcher.halign = Gtk.Align.CENTER;
                 screenshot_switcher.set_stack (app_screenshots);
 
                 var app_screenshot_spinner = new Gtk.Spinner ();
-                //  app_screenshot_spinner.halign = Gtk.Align.CENTER;
-                //  app_screenshot_spinner.valign = Gtk.Align.CENTER;
+                app_screenshot_spinner.halign = Gtk.Align.CENTER;
+                app_screenshot_spinner.valign = Gtk.Align.CENTER;
                 app_screenshot_spinner.active = true;
 
                 app_screenshot_not_found = new Gtk.Label (_("Screenshot Not Available"));
@@ -270,9 +270,8 @@ namespace AppCenter.Views {
 #endif
 
             var content_grid = new Gtk.Grid ();
-            //  content_grid.width_request = 800;
-            //  content_grid.halign = Gtk.Align.CENTER;
-            //  content_grid.hexpand = true;
+            content_grid.halign = Gtk.Align.CENTER;
+            content_grid.hexpand = true;
             content_grid.margin = 48;
             content_grid.row_spacing = 24;
             content_grid.orientation = Gtk.Orientation.VERTICAL;
@@ -348,8 +347,8 @@ namespace AppCenter.Views {
             var details_grid = new Gtk.Grid ();
             details_grid.column_spacing = 12;
             details_grid.row_spacing = 6;
-            //  details_grid.halign = Gtk.Align.START;
-            //  details_grid.valign = Gtk.Align.CENTER;
+            details_grid.halign = Gtk.Align.START;
+            details_grid.valign = Gtk.Align.CENTER;
             details_grid.attach (image, 0, 0, 1, 3);
             details_grid.attach (package_name, 1, 0);
             details_grid.attach (package_author, 1, 1, 2);
@@ -359,20 +358,12 @@ namespace AppCenter.Views {
             var header_flow = new Gtk.FlowBox ();
             header_flow.min_children_per_line = 1;
             header_flow.max_children_per_line = 2;
-            //  header_flow.hexpand = true;
+            header_flow.hexpand = true;
             //  header_flow.halign = Gtk.Align.FILL;
             //  header_flow.valign = Gtk.Align.CENTER;
             header_flow.margin = content_grid.margin / 2;
             header_flow.add (details_grid);
             header_flow.add (action_stack);
-            // Must be wide enough to fit long package name and progress bar
-            //  header_grid.width_request = content_grid.width_request + 2 * (content_grid.margin - header_grid.margin);
-            //  header_grid.attach (image, 0, 0, 1, 3);
-            //  header_grid.attach (package_name, 1, 0);
-            //  header_grid.attach (package_author, 1, 1, 2);
-            //  header_grid.attach (version_combo_revealer, 1, 2, 2);
-            //  header_grid.attach (app_version, 2, 0);
-            //  header_grid.attach (action_stack, 3, 0);
 
             if (!package.is_local) {
                 size_label = new Widgets.SizeLabel ();
@@ -387,11 +378,11 @@ namespace AppCenter.Views {
 
             var header_box = new Gtk.Grid ();
             header_box.get_style_context ().add_class ("banner");
-            //  header_box.hexpand = true;
+            header_box.hexpand = true;
             header_box.add (header_flow);
 
             var footer_grid = new Gtk.Grid ();
-            //  footer_grid.halign = Gtk.Align.CENTER;
+            footer_grid.halign = Gtk.Align.CENTER;
             footer_grid.margin = 12;
             //  footer_grid.width_request = 800;
 

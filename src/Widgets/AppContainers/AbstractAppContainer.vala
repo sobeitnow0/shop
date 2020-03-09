@@ -46,7 +46,6 @@ namespace AppCenter {
         protected Gtk.Button open_button;
 
         protected Gtk.Grid progress_grid;
-        protected Gtk.FlowBox progress_flow;
         protected Gtk.Grid button_grid;
         protected Gtk.ProgressBar progress_bar;
         protected Gtk.Button cancel_button;
@@ -162,44 +161,27 @@ namespace AppCenter {
             open_button.clicked.connect (launch_package_app);
 
             button_grid = new Gtk.Grid ();
-            //  button_grid.valign = Gtk.Align.CENTER;
-            //  button_grid.halign = Gtk.Align.END;
-            //  button_grid.hexpand = false;
-
+            button_grid.halign = Gtk.Align.END;
             button_grid.add (uninstall_button_revealer);
             button_grid.add (action_button_revealer);
             button_grid.add (open_button_revealer);
 
             progress_bar = new Gtk.ProgressBar ();
             progress_bar.show_text = true;
-            //  progress_bar.hexpand = true;
-            //  progress_bar.halign = Gtk.Align.FILL;
-            //  progress_bar.valign = Gtk.Align.CENTER;
             /* Request a width large enough for the longest text to stop width of
              * progress bar jumping around, but allow space for long package names */
             progress_bar.width_request = 222;
 
             cancel_button = new Gtk.Button.with_label (_("Cancel"));
-            //  cancel_button.valign = Gtk.Align.END;
-            //  cancel_button.halign = Gtk.Align.CENTER;
+            cancel_button.valign = Gtk.Align.END;
+            cancel_button.halign = Gtk.Align.CENTER;
             cancel_button.clicked.connect (() => action_cancelled ());
             
-            progress_flow = new Gtk.FlowBox ();
-            progress_flow.min_children_per_line = 1;
-            progress_flow.set_size_request (222, -1);
-            progress_flow.orientation = Gtk.Orientation.HORIZONTAL;
-            //  progress_flow.halign = Gtk.Align.FILL;
-            //  progress_flow.valign = Gtk.Align.FILL;
-            //  progress_flow.hexpand = true;
-            progress_flow.add (progress_bar);
-            progress_flow.add (cancel_button);
-
-            //  progress_grid = new Gtk.Grid ();
-            //  progress_grid.halign = Gtk.Align.END;
-            //  progress_grid.valign = Gtk.Align.CENTER;
-            //  progress_grid.column_spacing = 12;
-            //  progress_grid.attach (progress_bar, 0, 0, 1, 1);
-            //  progress_grid.attach (cancel_button, 1, 0, 1, 1);
+            progress_grid = new Gtk.Grid ();
+            progress_grid.orientation = Gtk.Orientation.HORIZONTAL;
+            progress_grid.halign = Gtk.Align.END;
+            progress_grid.attach (progress_bar, 0, 0, 1, 1);
+            progress_grid.attach (cancel_button, 0, 1, 1, 1);
 
             action_button_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
             action_button_group.add_widget (action_button);
@@ -208,11 +190,10 @@ namespace AppCenter {
             action_button_group.add_widget (open_button);
 
             action_stack = new Gtk.Stack ();
-            //  action_stack.hexpand = false;
-            //  action_stack.halign = Gtk.Align.END;
+            action_stack.halign = Gtk.Align.END;
             action_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
             action_stack.add_named (button_grid, "buttons");
-            action_stack.add_named (progress_flow, "progress");
+            action_stack.add_named (progress_grid, "progress");
             action_stack.show_all ();
 
             destroy.connect (() => {
