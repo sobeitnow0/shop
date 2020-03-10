@@ -42,6 +42,7 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         progress_bar.width_request = 169;
 
         release_description = new Gtk.Label (null);
+        release_description.margin_top = 6;
         release_description.selectable = true;
         release_description.use_markup = true;
         release_description.wrap = true;
@@ -49,6 +50,7 @@ public class AppCenter.Widgets.InstalledPackageRowGrid : AbstractPackageRowGrid 
         release_description.xalign = 0;
 
         release_expander = new Gtk.Expander ("");
+        release_expander.margin_top = 12;
         release_expander.add (release_description);
         release_expander.visible = true;
         release_expander.show_all ();
